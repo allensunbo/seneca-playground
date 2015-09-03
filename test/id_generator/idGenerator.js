@@ -3,5 +3,5 @@ function randomId(message, done) {
 }
 
 module.exports = function (options) {
-  this.add({generate: '_id'}, randomId)
+  this.add({_generate_: 'id'}, randomId)
 };

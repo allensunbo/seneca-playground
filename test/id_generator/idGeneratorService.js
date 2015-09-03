@@ -4,6 +4,6 @@
 
 var seneca = require('seneca')();
 
-seneca.use(require('./random'), {});
+seneca.use(require('./idGenerator'), {});
 
 seneca.listen({port: 9292, host: 'localhost', pin: 'role.math'});
