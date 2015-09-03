@@ -2,9 +2,9 @@ var seneca = require('seneca')();
 
 var argv = require('yargs').argv;
 
-// whether start service "idGenerator" in this node process or ask for other resources on network
-// use --include-random from command line
-argv['include-id-generator'] ? seneca.use(require('./id_generator/idGenerator'), {})
+// whether start service "idGeneratorService" in this node process or ask for other resources on network
+// use --include-id-generator from command line
+argv['include-id-generator'] ? seneca.use(require('./id_generator/idGeneratorPlugin'), {})
   : seneca.client({port: 9292, host: 'localhost'});
 
 var proxy = require('./id_generator/index')(seneca);
