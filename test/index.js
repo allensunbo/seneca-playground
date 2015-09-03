@@ -1,8 +1,9 @@
 module.exports = function (seneca) {
   return {
-    generateId: function () {
-      seneca.act({generate: 'id'}, function (err, result) {
-        console.log(result);
+    generateId: function (cb) {
+      seneca.act({generate: '_id'}, function (err, result) {
+        console.log(result)
+        cb(null, result);
       });
     }
   }
