@@ -8,6 +8,7 @@
     "body-parser": "^1.13.2",
     "express": "^4.13.1",
     "request": "^2.61.0",
-    "seneca": "0.6.2"
+    "seneca": "0.6.2",
+    "yargs": "^3.23.0"
   }
 }
