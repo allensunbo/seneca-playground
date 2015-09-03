@@ -3,6 +3,6 @@ function randomId(message, done) {
   done(null, {id: '' + Math.random()})
 }
 
-module.exports = function (seneca) {
-  seneca.add({generate: 'id'}, randomId);
+module.exports = function (options) {
+  this.add({generate: 'id'}, randomId);
 };

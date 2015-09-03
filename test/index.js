@@ -1,3 +1,9 @@
-/**
- * Created by bsun on 9/3/2015.
- */
+module.exports = function (seneca) {
+  return {
+    generateId: function () {
+      seneca.act({generate: 'id'}, function (err, result) {
+        console.log(result);
+      });
+    }
+  }
+};
