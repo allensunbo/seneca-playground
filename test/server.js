@@ -4,7 +4,6 @@ var argv = require('yargs').argv;
 
 // whether start service "idGeneratorService" in this node process or ask for other resources on network
 // use --include-id-generator from command line
-argv['include-id-generator'] ? loadIdGeneratorPlugin() : clientOfExternalIdGeneratorService();
 
 var idGeneratorProxy = require('./id_generator/index')(seneca);
 
@@ -19,6 +18,9 @@ seneca.add({generate: 'id'}, function (msg, response) {
 });
 
 seneca.listen({port: 9191, host: 'localhost'});
+
+argv['include-id-generator'] ? loadIdGeneratorPlugin() : clientOfExternalIdGeneratorService();
+
 
 function loadIdGeneratorPlugin(options) {
   seneca.use(require('./id_generator/idGeneratorPlugin'), options);
