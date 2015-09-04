@@ -17,15 +17,36 @@ seneca.add({generate: 'id'}, function (msg, response) {
 
 });
 
+var services = [];
+
+seneca.add({add: 'service'}, function (msg, response) {
+  var port = msg.port, host = msg.host;
+  if (serviceExists(port, host)) {
+    return response(null, {info: 'already added'});
+  }
+  services.push({port: port, host: host});
+  clientOfExternalIdGeneratorService(port, host);
+  response(null, {info: 'success'});
+});
+
 seneca.listen({port: 9191, host: 'localhost'});
 
-argv['include-id-generator'] ? loadIdGeneratorPlugin() : clientOfExternalIdGeneratorService();
+// argv['include-id-generator'] ? loadIdGeneratorPlugin() : clientOfExternalIdGeneratorService();
 
 
 function loadIdGeneratorPlugin(options) {
   seneca.use(require('./id_generator/idGeneratorPlugin'), options);
 }
 
-function clientOfExternalIdGeneratorService() {
-  seneca.client({port: 9292, host: 'localhost'})
+function clientOfExternalIdGeneratorService(port, host) {
+  seneca.client({port: port, host: host})
+}
+
+function serviceExists(port, host) {
+  for (var i = 0; i < services.length; i++) {
+    if (services[i].port === port && services[i].host === host) {
+      return true;
+    }
+  }
+  return false;
 }
