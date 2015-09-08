@@ -1,9 +1,9 @@
 var seneca = require('seneca')();
 var request = require('request');
 
-var port = 9494, host = 'localhost';
+var port = 9393, host = 'localhost';
 
-seneca.use(require('./idGeneratorPlugin'), {});
+seneca.use(require('./nameGeneratorPlugin'), {});
 
 seneca.listen({port: port, host: host});
 
